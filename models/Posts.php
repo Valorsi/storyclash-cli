@@ -12,11 +12,11 @@ class Post {
         $sql = 'SELECT * FROM 
                 posts AS p
                 WHERE p.feed_id = :id
-                LIMIT 5';
+                LIMIT :amount';
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':id', $feedId);
-        //$stmt->bindValue(':amount', $limit);
+        $stmt->bindValue(':amount', (int) $limit, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll();
 
