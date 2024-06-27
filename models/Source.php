@@ -43,7 +43,8 @@ class Source {
                 WHERE f.id = :id';
 
         $stmt = $this->db->prepare($sql);
-        $stmt->execute(['id' => $feedId]);
+        $stmt->bindValue(':id', $feedId);
+        $stmt->execute();
         $result = $stmt->fetchAll();
 
         return $result;
